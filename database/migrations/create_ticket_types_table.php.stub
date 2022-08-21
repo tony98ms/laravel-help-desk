@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use TonyStore\HelpDesk\Models\TicketType;
+
+class CreateTicketTypesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create(config('help-desk.tables.ticket_types'), function (Blueprint $table) {
+            $table->id('id');
+            $table->string('name');
+            $table->enum('status', [TicketType::ACTIVE, TicketType::INACTIVE])
+                ->default(TicketType::ACTIVE);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists(config('help-desk.tables.ticket_types'));
+    }
+}

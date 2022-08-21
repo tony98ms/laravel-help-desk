@@ -1,0 +1,38 @@
+{
+    "name": "tonystore/laravel-help-desk",
+    "description": "Package to generate and manage support tickets and help desk.",
+    "keywords": [
+        "help-desk",
+        "laravel-help-desk",
+        "laravel",
+        "tickets",
+        "laravel-tickets"
+    ],
+    "homepage": "https://github.com/tony98ms/laravel-help-desk",
+    "license": "MIT",
+    "authors": [{
+        "name": "Jean Anthony Medina Sandoval",
+        "email": "thony918@outlook.com",
+        "role": "Developer"
+    }],
+    "require": {
+        "php": "^7.0 || ^8.0",
+        "staudenmeir/belongs-to-through": "^2.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "TonyStore\\HelpDesk\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TonyStore\\HelpDesk\\HelpDeskServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

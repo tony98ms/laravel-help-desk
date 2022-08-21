@@ -1,0 +1,59 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use TonyStore\HelpDesk\Models\TicketCategory;
+
+class CreateTicketCategoriesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create(config('help-desk.tables.ticket_categories'), function (Blueprint $table) {
+            $table->id('id');
+            $table->string('name');
+            $table->longText('description')->nullable();
+            $table->unsignedBigInteger('ticket_priority_id')->nullable();
+            $table->foreign('ticket_priority_id')->references('id')
+                ->on(config('help-desk.tables.ticket_priorities'))->onDelete('SET NULL');
+            $table->enum('type', [TicketCategory::CATEGORY, TicketCategory::SUBCATEGORY])
+                ->default(TicketCategory::CATEGORY);
+            $table->enum('status', [TicketCategory::ACTIVE, TicketCategory::INACTIVE])
+                ->default(TicketCategory::ACTIVE);
+            $table->timestamps();
+        });
+
+        Schema::table(config('help-desk.tables.ticket_categories'), function (Blueprint $table) {
+            $table->unsignedBigInteger('ticket_category_id')->after('ticket_priority_id')->nullable();
+            $table->foreign('ticket_category_id')->references('id')
+                ->on(config('help-desk.tables.ticket_categories'));
+        });
+
+        Schema::create(config('help-desk.tables.ticket_category_type'), function (Blueprint $table) {
+            $table->id('id');
+            $table->unsignedBigInteger('ticket_category_id');
+            $table->foreign('ticket_category_id')->references('id')
+                ->on(config('help-desk.tables.ticket_categories'));
+            $table->unsignedBigInteger('ticket_type_id');
+            $table->foreign('ticket_type_id')->references('id')
+                ->on(config('help-desk.tables.ticket_types'));
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists(config('help-desk.tables.ticket_category_type'));
+        Schema::dropIfExists(config('help-desk.tables.ticket_categories'));
+    }
+}
