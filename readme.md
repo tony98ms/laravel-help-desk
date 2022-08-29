@@ -1,3 +1,4 @@
+[![Latest Stable Version](http://poser.pugx.org/tonystore/laravel-help-desk/v)](https://packagist.org/packages/tonystore/laravel-help-desk) [![Total Downloads](http://poser.pugx.org/tonystore/laravel-help-desk/downloads)](https://packagist.org/packages/tonystore/laravel-help-desk) [![License](http://poser.pugx.org/tonystore/laravel-help-desk/license)](https://packagist.org/packages/tonystore/laravel-help-desk) [![PHP Version Require](http://poser.pugx.org/tonystore/laravel-help-desk/require/php)](https://packagist.org/packages/tonystore/laravel-help-desk)
 # Laravel Help Desk
 Es un paquete para Laravel que permite generar tickets de soporte para cualquier aplicación de Laravel
 
@@ -30,14 +31,15 @@ return [
         'ticket_priorities' => 'ticket_priorities',
         'ticket_types' => 'ticket_types',
         'ticket_categories' => 'ticket_categories',
+        'ticket_category_type' => 'ticket_category_type',
         'ticket_comments' => 'ticket_comments',
-        'ticket_events' => 'ticket_events',
+        'ticket_files' => 'ticket_files',
         'ticket_states' => 'ticket_states',
     ],
 
     /**
-     * Modelo usado para Tickets, usado para los procesos
-     * de soporte.
+     * Modelo usado para suscripciones, usado para las relaciones
+     * del Trait
      */
     'models' => [
         'user' => \App\Models\User::class,
@@ -45,9 +47,10 @@ return [
         'ticket_priority' => \TonyStore\HelpDesk\Models\TicketPriority::class,
         'ticket_type' => \TonyStore\HelpDesk\Models\TicketType::class,
         'ticket_category' => \TonyStore\HelpDesk\Models\TicketCategory::class,
+        'ticket_category_type' => \TonyStore\HelpDesk\Models\TicketCategoryType::class,
         'ticket_comment' => \TonyStore\HelpDesk\Models\TicketComment::class,
-        'ticket_event' => \TonyStore\HelpDesk\Models\TicketEvent::class,
-        'ticket_state' => \TonyStore\HelpDesk\Models\TicketState::class,
+        'ticket_file' => \TonyStore\HelpDesk\Models\TicketFile::class,
+        'ticket_state' => \TonyStore\HelpDesk\Models\TicketState::class
     ]
 
 ];

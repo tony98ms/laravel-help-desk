@@ -18,13 +18,7 @@ class CreateTicketsTable extends Migration
             $table->string('title');
             $table->longText('body')->nullable();
             $table->unsignedBigInteger('requester_id');
-            $table->foreign('requester_id')->references('id')
-                ->on(config('help-desk.tables.user'))
-                ->onDelete('CASCADE');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')
-                ->on(config('help-desk.tables.user'))
-                ->onDelete('SET NULL');
             $table->dateTime('open_ticket_at');
             $table->dateTime('close_ticket_at')->nullable();
             $table->dateTime('assignmentt_at')->nullable();
